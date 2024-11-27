@@ -12,9 +12,9 @@ const Header = () => {
             Choose from a diverse menu featuring a deectable array of dishes
             crafted with the finest ingredients
           </p>
-          <Link to="/FoodDisplay">
+         
             <button >View Menu</button>
-          </Link>
+         
         </div>
       </div>
     </>
