@@ -1,15 +1,17 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { assets } from '../../assets/assets'
 import './Navbar.css'
 import { Link } from "react-router-dom";
-
+import { Link as ScrollLink } from "react-scroll";
+import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({setShowLogin}) => {
 
   const[menu,setMenu]=useState("home");
+  const {getTotalCartAmount}=useContext(StoreContext);
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link to="/Food-Delivery-Website">
         <img src={assets.logo} alt="" className="logo" />
       </Link>
       <ul className="navbar-menu">
@@ -19,15 +21,20 @@ const Navbar = ({setShowLogin}) => {
           }}
           className={menu === "home" ? "active" : ""}
         >
-          Home
+          <Link to="/Food-Delivery-Website">Home</Link>
         </li>
-        <li
-          onClick={() => {
-            setMenu("menu");
-          }}
-          className={menu === "menu" ? "active" : ""}
-        >
-          Menu
+        <li>
+          <ScrollLink
+            to="exploreMenu"
+            smooth={true}
+            duration={500}
+            onClick={() => {
+              setMenu("menu");
+            }}
+            className={menu === "menu" ? "active" : ""}
+          >
+            Menu
+          </ScrollLink>
         </li>
         <li
           onClick={() => {
@@ -50,7 +57,7 @@ const Navbar = ({setShowLogin}) => {
         <img src={assets.search_icon} alt="" />
 
         <div className="navbar-search-icon">
-          <div className="dot"> </div>
+          <div className={getTotalCartAmount()===0 ? "" : "dot"}> </div>
           <Link to="/cart">
             <img src={assets.basket_icon} alt="" />
           </Link>
